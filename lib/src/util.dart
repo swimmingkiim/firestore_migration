@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dart_console/dart_console.dart';
+import 'package:version/version.dart';
 
 void printHelperText(Console console) {
   console.writeLine('firestore_migration');
@@ -28,4 +31,21 @@ void printHelperText(Console console) {
   console.writeAligned(' ', 4);
   console
       .writeLine('${'--help'.padRight(15)} : Display helper text on terminal');
+}
+
+Future<List<MapEntry<Version, File>>> getFilesWithVersion(
+    Directory directory) async {
+  final files = await directory.list().toList();
+  return files.whereType<File>().map((file) {
+    final rawVersion = file.path
+        .split('/')
+        .last
+        .replaceFirst('.dart', '')
+        .split('_')
+        .map((number) => int.parse(number))
+        .toList();
+    final version = Version(rawVersion[0], rawVersion[1], rawVersion[2]);
+    return MapEntry(version, file);
+  }).toList()
+    ..sort((a, b) => a.key.compareTo(b.key));
 }
