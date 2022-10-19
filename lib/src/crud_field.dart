@@ -38,4 +38,14 @@ class CRUDField {
       updateMask_fieldPaths: [key],
     );
   }
+
+  Future<void> deleteField(Document document, String key) async {
+    final updatedDocument =
+        Document(name: document.name, fields: document.fields!..remove(key));
+    await firestoreApi.projects.databases.documents.patch(
+      updatedDocument,
+      document.name!,
+      currentDocument_exists: true,
+    );
+  }
 }
