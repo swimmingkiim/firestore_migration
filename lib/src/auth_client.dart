@@ -1,5 +1,3 @@
-import 'package:firebaseapis/identitytoolkit/v1.dart' as firebase_auth;
-import 'package:firebaseapis/firebaserules/v1.dart' as firebase_rules;
 import 'package:firebaseapis/firestore/v1.dart' as firestore;
 import 'package:googleapis_auth/auth_io.dart';
 

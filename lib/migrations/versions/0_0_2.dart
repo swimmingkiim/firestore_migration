@@ -1,5 +1,5 @@
 import 'package:firebaseapis/firestore/v1.dart';
-import 'package:dart_console/src/console.dart';
+import 'package:dart_console/dart_console.dart';
 import 'package:version/version.dart';
 import '../migration.dart';
 

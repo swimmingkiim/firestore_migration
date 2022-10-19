@@ -1,5 +1,5 @@
+import 'package:dart_console/dart_console.dart';
 import 'package:firebaseapis/firestore/v1.dart';
-import 'package:dart_console/src/console.dart';
 import 'package:firestore_migration/config/config.dart';
 import 'package:firestore_migration/src/crud_document.dart';
 import 'package:firestore_migration/src/crud_field.dart';
