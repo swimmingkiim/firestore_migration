@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_console/dart_console.dart';
-import 'package:dart_eval/dart_eval.dart';
+import 'package:firestore_migration/migrations/migrations.dart';
 import 'package:firestore_migration/src/arguments_parser.dart';
+import 'package:firestore_migration/src/auth_client.dart';
 import 'package:firestore_migration/src/util.dart';
+import 'package:firebaseapis/firestore/v1.dart' as firestore;
 
 Future<void> main(List<String> arguments) async {
   final console = Console();
@@ -12,6 +15,7 @@ Future<void> main(List<String> arguments) async {
   final argumentsResult = parseArguments(arguments);
   final command = argumentsResult.command;
   String? version = argumentsResult['version'];
+  final serviceAccount = argumentsResult['service-account'];
   final isHelp = argumentsResult['help'];
 
   // Check isHelp is true
@@ -31,33 +35,34 @@ Future<void> main(List<String> arguments) async {
   console.writeLine('Start : Firestore Migration...');
   console.writeLine('\n');
 
-  final migrationFiles = await getFilesWithVersion(Directory('migrations'));
+  final migrationFiles =
+      await getFilesWithVersion(Directory('lib/migrations/versions'));
 
-  late File migrationFile;
   if (version == null) {
     // Find latest version
     version = migrationFiles.last.key.toString();
-    migrationFile = migrationFiles.last.value;
   } else {
     // Check if version file exists
     final fileIndex =
         migrationFiles.indexWhere((entry) => entry.key.toString() == version);
-    if (fileIndex >= 0) {
-      migrationFile = migrationFiles[fileIndex].value;
-    } else {
+    if (fileIndex < 0) {
       throw Error();
     }
   }
 
-  // Run migration script
-  final rawString = migrationFile.readAsStringSync();
-  eval(
-    rawString,
-    function: 'migrate_${version.replaceAll('.', '_')}',
-    args: [],
+  // Get Firestore API
+  final authClient = await getAuthClient(
+    jsonDecode(File(serviceAccount).readAsStringSync()),
   );
+  final firestoreApi = firestore.FirestoreApi(authClient);
+
+  // Run migration script from lib/migrations
+  migrations
+      .firstWhere((migration) => migration.version.toString() == version)
+      .execute(firestoreApi, console);
 
   // End Migration
   console.writeLine('\n');
   console.writeLine('Finish : Firestore Migration!');
+  exit(0);
 }
