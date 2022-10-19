@@ -24,6 +24,11 @@ void printHelperText(Console console) {
   console.writeAligned(' ', 15);
   console.writeLine(
       ' : Specify migration file version to run. Format should be match to semver(x.y.z) Default is latest.');
+  console.writeAligned(' ', 4);
+  console.writeLine('--service-account, -s'.padRight(15));
+  console.writeAligned(' ', 4);
+  console.writeAligned(' ', 15);
+  console.writeLine(' : Path of service account json file. (required option)');
 
   console.writeLine('\n');
   console.writeLine('[Flags]');
