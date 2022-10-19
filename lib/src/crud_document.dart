@@ -19,4 +19,10 @@ class CRUDDocument {
     return await firestoreApi.projects.databases.documents
         .get('$rootPath/$documentPath');
   }
+
+  Future<List<Document>> readDocuments(String collectionPath) async {
+    final result = await firestoreApi.projects.databases.documents
+        .listDocuments(rootPath, collectionPath);
+    return result.documents ?? [];
+  }
 }

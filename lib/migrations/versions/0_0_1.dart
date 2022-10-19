@@ -23,9 +23,11 @@ class Migration_0_0_1 implements MigrationFunc {
       console: console,
       projectId: 'test-firebase-6680c',
     );
-    final document =
-        await crudDocument.readDocument('test/tMgqEWqTHzMLC0vy30Op');
-    await crudField.deleteField(document, 'hello');
+    final documents = await crudDocument.readDocuments('test');
+    for (var document in documents) {
+      await crudField.createField(
+          document, 'hello', Value(stringValue: 'world'));
+    }
     console.writeLine('done!');
   }
 }
