@@ -4,3 +4,6 @@
 
 # Conventional directory for build output.
 build/
+
+# test service account file
+service_account.json
