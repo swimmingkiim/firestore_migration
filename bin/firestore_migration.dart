@@ -57,7 +57,7 @@ Future<void> main(List<String> arguments) async {
   final firestoreApi = firestore.FirestoreApi(authClient);
 
   // Run migration script from lib/migrations
-  migrations
+  await migrations
       .firstWhere((migration) => migration.version.toString() == version)
       .execute(firestoreApi, console);
 
