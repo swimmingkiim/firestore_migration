@@ -2,10 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_console/dart_console.dart';
-import 'package:firestore_migration/migrations/migrations.dart';
-import 'package:firestore_migration/src/arguments_parser.dart';
-import 'package:firestore_migration/src/auth_client.dart';
-import 'package:firestore_migration/src/util.dart';
+import 'package:firestore_migration/firestore_migration.dart';
 import 'package:firebaseapis/firestore/v1.dart' as firestore;
 
 Future<void> main(List<String> arguments) async {
