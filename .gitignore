@@ -7,3 +7,6 @@ build/
 
 # test service account file
 service_account.json
+
+# etc test info
+lib/config/config.dart

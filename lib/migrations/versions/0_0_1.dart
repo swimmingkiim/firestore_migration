@@ -1,5 +1,6 @@
 import 'package:firebaseapis/firestore/v1.dart';
 import 'package:dart_console/src/console.dart';
+import 'package:firestore_migration/config/config.dart';
 import 'package:firestore_migration/src/crud_document.dart';
 import 'package:firestore_migration/src/crud_field.dart';
 import 'package:version/version.dart';
@@ -16,12 +17,12 @@ class Migration_0_0_1 implements MigrationFunc {
     final crudField = CRUDField(
       firestoreApi: firestoreApi,
       console: console,
-      projectId: 'test-firebase-6680c',
+      projectId: projectId,
     );
     final crudDocument = CRUDDocument(
       firestoreApi: firestoreApi,
       console: console,
-      projectId: 'test-firebase-6680c',
+      projectId: projectId,
     );
     final documents = await crudDocument.readDocuments('test');
     for (var document in documents) {
