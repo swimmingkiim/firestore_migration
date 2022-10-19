@@ -25,7 +25,8 @@ class Migration_0_0_1 implements MigrationFunc {
     );
     final document =
         await crudDocument.readDocument('test/tMgqEWqTHzMLC0vy30Op');
-    await crudField.createField(document, 'hello', Value(stringValue: 'world'));
+    await crudField.createField(
+        document, 'hello', Value(stringValue: 'world2'));
     console.writeLine('done!');
   }
 }

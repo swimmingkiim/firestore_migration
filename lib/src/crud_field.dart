@@ -26,4 +26,16 @@ class CRUDField {
       updateMask_fieldPaths: [key],
     );
   }
+
+  Future<void> updateField(Document document, String key, Value value) async {
+    final updatedDocument = Document(name: document.name, fields: {
+      key: value,
+    });
+    await firestoreApi.projects.databases.documents.patch(
+      updatedDocument,
+      document.name!,
+      currentDocument_exists: true,
+      updateMask_fieldPaths: [key],
+    );
+  }
 }
