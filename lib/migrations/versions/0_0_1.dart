@@ -24,11 +24,30 @@ class Migration_0_0_1 implements MigrationFunc {
       console: console,
       projectId: projectId,
     );
-    final documents = await crudDocument.readDocuments('test');
-    for (var document in documents) {
-      await crudField.createField(
-          document, 'hello', Value(stringValue: 'world'));
-    }
+    final document =
+        await crudDocument.readDocument('test/8yQWiY1dzOsbAax0RZJi');
+    console.writeLine(CRUDDocument.getDocumentId(document));
+    // final count = await crudDocument.countDocuments(
+    //   StructuredQuery(
+    //     from: [
+    //       CollectionSelector(
+    //         collectionId: 'test',
+    //       ),
+    //     ],
+    //     where: Filter(
+    //       fieldFilter: FieldFilter(
+    //         field: FieldReference(
+    //           fieldPath: 'hello',
+    //         ),
+    //         op: 'EQUAL',
+    //         value: Value(
+    //           stringValue: 'world',
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
+    // console.writeLine('count : $count');
     console.writeLine('done!');
   }
 }
