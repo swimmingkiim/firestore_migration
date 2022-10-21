@@ -109,10 +109,12 @@ packages:
   firebaseapis:
     dependency: "direct main"
     description:
-      name: firebaseapis
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
+      path: "generated/firebaseapis"
+      ref: HEAD
+      resolved-ref: fa104c5b7fe686e56743480820fcaab85263acc6
+      url: "https://github.com/swimmingkiim/dart_firebase_apis.git"
+    source: git
+    version: "0.1.1"
   frontend_server_client:
     dependency: transitive
     description:

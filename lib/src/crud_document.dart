@@ -48,7 +48,7 @@ class CRUDDocument {
       rootPath,
     );
     final count = int.parse(
-        (result.result?.aggregateFields?['result'])?.integerValue ?? '0');
+        (result[0].result?.aggregateFields?['result'])?.integerValue ?? '0');
     return count;
   }
 }
